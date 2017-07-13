@@ -8,6 +8,7 @@ import {Route, Router} from '@angular/router';
 import 'rxjs/add/operator/toPromise';
 import {Injectable, OnInit} from '@angular/core';
 import {User} from "../models/User";
+import {NotificationService} from "ng2-notify-popup";
 
 
 @Injectable()
@@ -15,7 +16,9 @@ export class FriendService implements OnInit{
 
   header:any={};
 
-  constructor(private http:Http, private router: Router){
+  constructor(private http:Http,
+              private router: Router,
+              private notify: NotificationService){
 
   }
 
@@ -30,7 +33,8 @@ export class FriendService implements OnInit{
     });
   }
 
-  
+
+
 
   getInitialAll():void{
     var user:any = {};

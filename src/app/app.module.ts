@@ -9,6 +9,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {FriendService} from "./services/friend.service";
+import {NgNotifyPopup} from "ng2-notify-popup";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {FriendService} from "./services/friend.service";
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
+    NgNotifyPopup
   ],
   providers: [
     FriendService
