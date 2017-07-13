@@ -1,26 +1,65 @@
-<div class="col-md-12">
-  <table class="table">
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>Add</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let user of users">
-      <td>{{user.firstName}} {{user.lastName}}</td>
-      <td>
-        <div class="checkbox">
-          <label><input type="checkbox" value="user.friend" [(ngModel)]="user.friend"> {{user.friend}} </label>
-        </div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-</div>
-<div class="col-md-12" align="right">
-  <div class="well">
-    <button class="btn btn-success" (click)="addFriends()">Add</button>
+
+<div *ngIf="showLoader">
+  <div class="col-md-12" align="center">
+    <md-spinner></md-spinner>
   </div>
 </div>
 
+<div *ngIf="!showLoader">
+  <div *ngIf="foundExistingFriends">
+    <div class="col-md-12">
+      <h2>Existing Friends</h2>
+    </div>
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th style="width: 10%">Add</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of existingFriends">
+          <td>{{user.firstName}} {{user.lastName}}</td>
+          <td>
+            Added
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+  <div class="col-md-12">
+    <h3>Friend Suggestions</h3>
+  </div>
+
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th style="width: 10%">Add</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.firstName}} {{user.lastName}}</td>
+        <td>
+          <div class="checkbox">
+            <label><input type="checkbox" value="user.friend" [(ngModel)]="user.friend"> {{user.friend}} </label>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-12" align="right">
+    <div class="well">
+      <button class="btn btn-success" (click)="addFriends()">Add</button>
+    </div>
+  </div>
+
+</div>

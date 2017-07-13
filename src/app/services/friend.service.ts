@@ -33,7 +33,24 @@ export class FriendService implements OnInit{
     });
   }
 
-
+  saveFriends(users:Array<User>):Promise<boolean>{
+    var url:string = 'http://localhost:8222/userFriend/saveFriends';
+    var successStatus:boolean = false;
+    return new Promise<boolean>((resolve, reject)=>{
+      this.headers().then((headers)=>{
+        this.http.post(url, JSON.stringify(users), headers)
+          .toPromise()
+          .then((response)=>{
+            this.notify.show("Successfully Saved!");
+            resolve(true);
+          })
+          .catch((data)=>{
+            this.notify.show("Saving failed!");
+            resolve(false);
+          });
+      });
+    });
+  }
 
 
   getInitialAll():void{
@@ -106,7 +123,7 @@ export class FriendService implements OnInit{
     var headers: any = new Headers();
     headers.append("Authorization", "Bearer "+ localStorage.getItem('token'));
     headers.append("Accept", "application/json");
-    headers.append('Content-Type' , 'application/x-www-form-urlencoded; charset=UTF-8');
+    headers.append('Content-Type' , 'application/json');
     let options = new RequestOptions({headers:headers});
     return Promise.resolve(options);
   }

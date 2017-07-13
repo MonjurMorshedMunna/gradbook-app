@@ -9,7 +9,9 @@ import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {FriendService} from "./services/friend.service";
-import {NgNotifyPopup} from "ng2-notify-popup";
+import {NgNotifyPopup, NotificationService} from "ng2-notify-popup";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MaterialModule, MdButtonModule, MdCheckboxModule} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -24,10 +26,15 @@ import {NgNotifyPopup} from "ng2-notify-popup";
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-    NgNotifyPopup
+    NgNotifyPopup,
+    BrowserAnimationsModule,
+    MdButtonModule,
+    MdCheckboxModule,
+    MaterialModule
   ],
   providers: [
-    FriendService
+    FriendService,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })
