@@ -1,1 +1,26 @@
-<h1>Friends Works!</h1>
+<div class="col-md-12">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Add</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.firstName}} {{user.lastName}}</td>
+      <td>
+        <div class="checkbox">
+          <label><input type="checkbox" value="user.friend" [(ngModel)]="user.friend"> {{user.friend}} </label>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div class="col-md-12" align="right">
+  <div class="well">
+    <button class="btn btn-success" (click)="addFriends()">Add</button>
+  </div>
+</div>
+

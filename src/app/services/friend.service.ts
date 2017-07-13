@@ -6,15 +6,31 @@ import {Http, Headers, RequestOptions, RequestMethod} from '@angular/http';
 import {Route, Router} from '@angular/router';
 
 import 'rxjs/add/operator/toPromise';
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
+import {User} from "../models/User";
 
 
 @Injectable()
-export class FriendService{
+export class FriendService implements OnInit{
+
+  header:any={};
 
   constructor(private http:Http, private router: Router){
 
   }
+
+  ngOnInit():void{
+    console.log("In the initial phrase");
+    this.headers().then((options)=>{
+      this.header = options;
+      this.getExistingFriends().then((users:Array<User>)=>{
+        console.log("users");
+        console.log(users);
+      });
+    });
+  }
+
+  
 
   getInitialAll():void{
     var user:any = {};
@@ -30,6 +46,53 @@ export class FriendService{
         .catch((data)=>{
         console.log(data);
         });
+    });
+
+  }
+
+
+  getExistingFriends():Promise<any>{
+    console.log("In the existing friends");
+    return new Promise<Array<User>>((resolve, reject)=>{
+        let url='http://localhost:8222/userFriend/existingFriends';
+        var users:any={};
+        this.headers().then((header)=>{
+           this.http.get(url, header)
+            .toPromise()
+            .then((response)=> {
+             console.log(response);
+              response.json().data as Array<User>
+              var users:Array<User> = [];
+              users = JSON.parse(response.text()) ;
+              console.log('users json');
+              console.log(users);
+              resolve(users);
+
+            })
+            .catch((data)=>{
+              console.log(data);
+            });
+        })
+      });
+
+
+  }
+
+  getFriendSuggestion():Promise<Array<User>>{
+    let url='http://localhost:8222/userFriend/friendSuggestion';
+    return new Promise<Array<User>>((resolve, reject)=>{
+      this.headers().then((header)=>{
+        this.http.get(url, header)
+          .toPromise()
+          .then((response)=>{
+            var user:Array<User> = [];
+            user = JSON.parse(response.text());
+            resolve(user);
+          })
+          .catch((data)=>{
+            console.error(data);
+          })
+      });
     });
 
   }

@@ -1,5 +1,8 @@
 
 import {Component, OnInit} from "@angular/core";
+import {ActivatedRoute, Router} from "@angular/router";
+import {FriendService} from "../services/friend.service";
+import {User} from "../models/User";
 
 
 
@@ -10,10 +13,16 @@ import {Component, OnInit} from "@angular/core";
 
 export class MessageComponent implements OnInit{
 
-  constructor(){
+  users:Array<User>=[];
+
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private friendService: FriendService){
 
   }
   ngOnInit():void{
-
+    this.friendService.getExistingFriends().then((friends:Array<User>)=>{
+      console.log(friends);
+    });
   }
 }
