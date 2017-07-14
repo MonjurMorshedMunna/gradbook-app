@@ -1,2 +1,29 @@
-<h1>News feed works!</h1>
-<button class="btn btn-success" (click)="fetchAll()">Click</button>
+<div *ngIf="showLoader">
+  <div class="col-md-12" align="center">
+    <md-spinner></md-spinner>
+  </div>
+</div>
+<div *ngIf="!showLoader">
+  <div class="col-md-12">
+    <div class="well">
+      <h2>New News Feed</h2><br/>
+      <textarea class="form-control" rows="5" id="feed" [(ngModel)]="newNewsFeed.feed"></textarea>
+      <button class="btn btn-success" (click)="savePost()">Post</button>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+        <th>Feeds</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let newsFeed of newsFeeds">
+          <p><b>{{newsFeed.userName}}</b></p>
+          <p>{{newsFeed.feed}}</p>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

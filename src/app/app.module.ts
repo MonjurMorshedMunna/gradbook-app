@@ -12,6 +12,7 @@ import {FriendService} from "./services/friend.service";
 import {NgNotifyPopup, NotificationService} from "ng2-notify-popup";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule, MdButtonModule, MdCheckboxModule} from "@angular/material";
+import {NewsFeedService} from "./services/newsfeed.service";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {MaterialModule, MdButtonModule, MdCheckboxModule} from "@angular/materia
   ],
   providers: [
     FriendService,
+    NewsFeedService,
     NotificationService
   ],
   bootstrap: [AppComponent]
